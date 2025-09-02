@@ -1,0 +1,40 @@
+{
+  "title": "Music App Controller (macOS)",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to macOS Music Controller",
+        "description": "Enter the IP/port for your macOS Music controller service.",
+        "data": {
+          "host": "Controller IP/hostname",
+          "port": "Port"
+        }
+      },
+      "reconfigure": {
+        "title": "Update connection",
+        "description": "Change controller IP/port."
+      }
+    },
+    "abort": {
+      "already_configured": "This controller is already configured."
+    },
+    "error": {
+      "cannot_connect": "Cannot connect",
+      "unknown": "Unknown error"
+    },
+    "progress": {
+      "testing": "Testing connection…"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "data": {
+          "host": "Controller IP/hostname",
+          "port": "Port"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+  - title: Browse & Search
+    path: search
+    cards:
+      - type: entities
+        title: Quick Search
+        entities:
+          - type: button
+            name: Search “Daft Punk”
+            tap_action:
+              action: call-service
+              service: media_player.search_media
+              target:
+                entity_id: media_player.apple_music_player
+              data:
+                search_query: "Daft Punk"
+          - type: button
+            name: Search “Chill” playlists
+            tap_action:
+              action: call-service
+              service: media_player.search_media
+              target:
+                entity_id: media_player.apple_music_player
+              data:
+                search_query: "Chill"
+                media_filter_classes:
+                  - playlist
+          - type: button
+            name: "Search albums: “Random Access”"
+            tap_action:
+              action: call-service
+              service: media_player.search_media
+              target:
+                entity_id: media_player.apple_music_player
+              data:
+                search_query: "Random Access"
+                media_filter_classes:
+                  - album
+
+      - type: entities
+        title: Quick Play
+        entities:
+          - type: button
+            name: Play album
+            icon: mdi:album
+            tap_action:
+              action: call-service
+              service: media_player.play_media
+              target:
+                entity_id: media_player.apple_music_player
+              data:
+                media_content_type: music
+                media_content_id: "play_album:Random Access Memories"
+          - type: button
+            name: Shuffle album
+            icon: mdi:shuffle-variant
+            tap_action:
+              action: call-service
+              service: media_player.play_media
+              target:
+                entity_id: media_player.apple_music_player
+              data:
+                media_content_type: music
+                media_content_id: "shuffle_album:Random Access Memories"
+          - type: button
+            name: Shuffle playlist
+            icon: mdi:playlist-music
+            tap_action:
+              action: call-service
+              service: media_player.play_media
+              target:
+                entity_id: media_player.apple_music_player
+              data:
+                media_content_type: music
+                media_content_id: "shuffle_playlist:Your Playlist Name"
