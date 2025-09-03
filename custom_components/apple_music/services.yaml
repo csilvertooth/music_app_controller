@@ -1,0 +1,15 @@
+set_airplay_devices:
+  name: Set AirPlay devices
+  description: Set the output AirPlay devices used for Apple Music playback via the Apple Music Server.
+  target:
+    entity:
+      domain: media_player
+      integration: apple_music
+  fields:
+    devices:
+      name: Devices
+      description: List of AirPlay device names (exactly as shown in the media player's available_devices attribute).
+      required: true
+      example: ["Living Room", "Office Power Amp"]
+      selector:
+        object:

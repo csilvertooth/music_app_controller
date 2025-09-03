@@ -1,0 +1,8 @@
+#configurations.yaml
+input_select:
+  airplay_devices:
+    name: AirPlay Devices
+    options:
+      - "— Select —"
+    initial: "— Select —"
+    icon: mdi:cast-audio
