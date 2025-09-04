@@ -1,0 +1,17 @@
+#Automations.yaml
+  - id: airplay_list_sync
+    alias: "Apple Music: sync AirPlay device list"
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: media_player.apple_music_player # adjust if your entity_id differs
+      - platform: homeassistant
+        event: start
+    action:
+      - variables:
+          devices: "{{ state_attr('media_player.apple_music_player', 'source_list') or [] }}"
+      - service: input_select.set_options
+        target:
+          entity_id: input_select.airplay_devices
+        data:
+          options: "{{ devices if devices|length > 0 else ['No devices found'] }}"
