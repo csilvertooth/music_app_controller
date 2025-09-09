@@ -1,0 +1,97 @@
+# packages/companion_app_controls.yaml
+#
+# Drop this file into your Home Assistant `config/packages/` folder
+# (create the folder if it doesn't exist). Then reload YAML or restart.
+#
+# These helpers and scripts are designed to be used from the HA Companion
+# app (widgets, Apple Shortcuts/Android intents, etc.). Adjust the
+# `entity_id` for your media player if needed.
+
+# Change this to match your entity if different:
+#   - New installs often use: media_player.music_control_player
+#   - Older examples may use: media_player.music_control_player
+homeassistant:
+  customize:
+    script.music_play_pause:
+      friendly_name: Music Play/Pause
+      icon: mdi:play-pause
+    script.music_next_track:
+      friendly_name: Music Next Track
+      icon: mdi:skip-next
+    script.music_previous_track:
+      friendly_name: Music Previous Track
+      icon: mdi:skip-previous
+    script.music_set_master_volume:
+      friendly_name: Music Set Master Volume
+      icon: mdi:volume-source
+    script.music_volume_up:
+      friendly_name: Music Volume Up (5%)
+      icon: mdi:volume-plus
+    script.music_volume_down:
+      friendly_name: Music Volume Down (5%)
+      icon: mdi:volume-minus
+
+input_number:
+  music_master_volume:
+    name: Music Master Volume
+    icon: mdi:volume-high
+    min: 0
+    max: 100
+    step: 1
+    unit_of_measurement: "%"
+    mode: slider
+
+script:
+  music_play_pause:
+    alias: Music Play/Pause
+    mode: single
+    sequence:
+      - action: media_player.media_play_pause
+        target:
+          entity_id: media_player.music_control_player
+
+  music_next_track:
+    alias: Music Next Track
+    mode: single
+    sequence:
+      - action: media_player.media_next_track
+        target:
+          entity_id: media_player.music_control_player
+
+  music_previous_track:
+    alias: Music Previous Track
+    mode: single
+    sequence:
+      - action: media_player.media_previous_track
+        target:
+          entity_id: media_player.music_control_player
+
+  # Increase master volume by 5%
+  music_volume_up:
+    alias: Music Volume Up (5%)
+    mode: single
+    sequence:
+      - variables:
+          step: 0.05
+          cur: "{{ state_attr('media_player.music_control_player', 'volume_level') | float(0.5) }}"
+          new: "{{ 1.0 if (cur + step) > 1.0 else (cur + step) }}"
+      - action: media_player.volume_set
+        target:
+          entity_id: media_player.music_control_player
+        data:
+          volume_level: "{{ new }}"
+
+  # Decrease master volume by 5%
+  music_volume_down:
+    alias: Music Volume Down (5%)
+    mode: single
+    sequence:
+      - variables:
+          step: 0.05
+          cur: "{{ state_attr('media_player.music_control_player', 'volume_level') | float(0.5) }}"
+          new: "{{ 0.0 if (cur - step) < 0.0 else (cur - step) }}"
+      - action: media_player.volume_set
+        target:
+          entity_id: media_player.music_control_player
+        data:
+          volume_level: "{{ new }}"
