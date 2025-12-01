@@ -1,0 +1,13 @@
+{
+  "domain": "apple_music",
+  "name": "Music App Controller (macOS)",
+  "version": "0.7.6",
+  "documentation": "https://github.com/csilvertooth/music_app_controller#readme",
+  "issue_tracker": "https://github.com/csilvertooth/music_app_controller/issues",
+  "codeowners": ["@csilvertooth"],
+  "config_flow": true,
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "loggers": ["custom_components.apple_music"],
+  "requirements": []
+}
