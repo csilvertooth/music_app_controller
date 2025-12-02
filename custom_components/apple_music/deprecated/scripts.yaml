@@ -1,0 +1,10 @@
+#scripts.yaml
+
+set_airplay_devices:
+  alias: Apply AirPlay Devices
+  sequence:
+    - action: media_player.select_source
+      target:
+        entity_id: media_player.apple_music_player
+      data:
+        source: "{{ states('input_select.airplay_devices') }}"
