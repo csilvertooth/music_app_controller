@@ -1,0 +1,6 @@
+{
+  "name": "Music App Controller (macOS)",
+  "render_readme": true,
+  "domains": ["apple_music"],
+  "country": "US"
+}
