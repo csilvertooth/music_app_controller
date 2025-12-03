@@ -1,0 +1,151 @@
+# Music App Controller – example Lovelace dashboard (YAML mode)
+# Copy this file to: config/dashboards/music_app_controller_dashboard.yaml
+# Then add this to configuration.yaml (top-level):
+#
+# lovelace:
+#   dashboards:
+#     music-app-controller:   # key must include a hyphen (-)
+#       mode: yaml
+#       title: Music Controller
+#       icon: mdi:music
+#       show_in_sidebar: true
+#       filename: dashboards/music_app_controller_dashboard.yaml
+
+title: Music Controller
+views:
+  - title: Now Playing
+    path: now
+    cards:
+      - type: media-control
+        entity: media_player.apple_music_player
+        grid_options:
+          columns: full
+      - features:
+          - type: media-player-volume-slider
+        type: tile
+        entity: media_player.apple_music_player
+        name: Master Volume
+        features_position: bottom
+        vertical: false
+        grid_options:
+          columns: full
+          
+      - type: media-control
+        entity: media_player.apple_music_player
+        grid_options:
+          columns: full
+      - type: custom:layout-card
+        layout: grid
+        gridrows: 1
+        gridcols: 1
+        cards:
+          - type: custom:mini-media-player
+            entity: media_player.apple_music_player
+            artwork: cover
+            hide:
+              controls: true
+              icon: true
+              info: true
+            volume_stateless: true
+            volume_control: true
+            volume_slider:
+              direction: horizontal
+            name: Master Volume
+            features_position: bottom
+            vertical: false
+            grid_options:
+              columns: full
+
+      - type: picture-entity
+        entity: media_player.apple_music_player
+        show_state: true
+        show_name: false
+
+      - type: entities
+        title: Track Info
+        entities:
+          - type: attribute
+            entity: media_player.apple_music_player
+            attribute: media_title
+            name: Title
+          - type: attribute
+            entity: media_player.apple_music_player
+            attribute: media_artist
+            name: Artist
+          - type: attribute
+            entity: media_player.apple_music_player
+            attribute: media_album_name
+            name: Album
+          - type: attribute
+            entity: media_player.apple_music_player
+            attribute: selected_devices
+            name: Active outputs
+
+
+  - title: AirPlay Outputs
+    path: airplay
+    cards:
+      - type: entities
+        title: AirPlay Outputs
+        entities:
+          - entity: input_select.airplay_devices
+            name: Select output
+          - entity: script.set_airplay_devices
+            name: Apply selected output
+          - type: attribute
+            entity: media_player.apple_music_player
+            attribute: available_devices
+            name: Available outputs
+          - type: attribute
+            entity: media_player.apple_music_player
+            attribute: selected_devices
+            name: Active outputs
+
+      - type: tile
+        entity: media_player.apple_music_player
+        name: Refresh Outputs
+        icon: mdi:script
+        tap_action:
+          action: call-service
+          service: homeassistant.update_entity
+          target:
+            entity_id: media_player.apple_music_player
+
+  - title: Server UI
+    panel: true
+    path: server
+    cards:
+      - type: iframe
+        url: "/api/apple_music/ui"
+        aspect_ratio: 200%
+
+  - title: Actions and Maintenance
+    path: actions
+    cards:
+      - type: entities
+        title: Maintenance
+        entities:
+          - type: button
+            name: Refresh Outputs
+            icon: mdi:script
+            tap_action:
+              action: call-service
+              service: homeassistant.update_entity
+              target:
+                entity_id: media_player.apple_music_player
+          - type: button
+            name: Purge Album Art
+            icon: mdi:script
+            tap_action:
+              action: call-service
+              service: apple_music.purge_album_cache
+              target:
+                entity_id: media_player.apple_music_player
+          - type: button
+            name: Purge Thumbnails
+            icon: mdi:script
+            tap_action:
+              action: call-service
+              service: apple_music.purge_thumb_cache
+              target:
+                entity_id: media_player.apple_music_player
