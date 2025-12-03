@@ -1,0 +1,209 @@
+views:
+  - title: Home
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Apple Music Controller
+            heading_style: title
+          - type: media-control
+            entity: media_player.music_control_player
+          - type: tile
+            grid_options:
+              columns: full
+            entity: media_player.music_control_player
+            name: Music Controller Volume
+            vertical: false
+            features:
+              - type: media-player-volume-buttons
+                step: 5
+              - type: media-player-volume-slider
+            features_position: bottom
+      - type: grid
+        cards:
+          - type: heading
+            heading_style: title
+            heading: Playlist Selector
+          - type: button
+            name: Play Favorite Songs
+            icon: mdi:heart-multiple
+            tap_action:
+              action: call-service
+              service: media_player.play_media
+              target:
+                entity_id: media_player.music_control_player
+              data:
+                media_content_type: music
+                media_content_id: play_playlist:Favorite Songs
+          - type: button
+            name: Play Go To 2
+            icon: mdi:music-circle
+            tap_action:
+              action: call-service
+              service: media_player.play_media
+              target:
+                entity_id: media_player.music_control_player
+              data:
+                media_content_type: music
+                media_content_id: play_playlist:Go To 2
+          - type: button
+            name: Play Holiday Spectacular
+            icon: mdi:pine-tree
+            tap_action:
+              action: call-service
+              service: media_player.play_media
+              target:
+                entity_id: media_player.music_control_player
+              data:
+                media_content_type: music
+                media_content_id: play_playlist:Holiday Spectacular
+          - type: button
+            name: Play Relaxing
+            icon: mdi:spa
+            tap_action:
+              action: call-service
+              service: media_player.play_media
+              target:
+                entity_id: media_player.music_control_player
+              data:
+                media_content_type: music
+                media_content_id: play_playlist:Relaxing
+          - type: button
+            name: Shuffle Favorite Songs
+            icon: mdi:shuffle-variant
+            tap_action:
+              action: call-service
+              service: media_player.play_media
+              target:
+                entity_id: media_player.music_control_player
+              data:
+                media_content_type: music
+                media_content_id: shuffle_playlist:Favorite Songs
+      - type: grid
+        cards:
+          - type: heading
+            heading_style: title
+            heading: Whole House Audio
+          - type: button
+            name: Enable All Speakers
+            icon: mdi:speaker-multiple
+            tap_action:
+              action: call-service
+              service: apple_music.set_selected_airplay_devices
+              target:
+                entity_id: media_player.music_control_player
+              data:
+                devices:
+                  - Office Power Amp AirPlay
+                  - Marantz AV7703 AirPlay
+                  - Master Bedroom AirPlay
+                  - Office HomePod Mini
+                  - ZippPortable AirPlay
+          - type: button
+            name: Main Floor Only
+            icon: mdi:home-floor-1
+            tap_action:
+              action: call-service
+              service: apple_music.set_selected_airplay_devices
+              target:
+                entity_id: media_player.music_control_player
+              data:
+                devices:
+                  - Office Power Amp AirPlay
+                  - Marantz AV7703 AirPlay
+          - type: button
+            name: Bedroom Only
+            icon: mdi:bed
+            tap_action:
+              action: call-service
+              service: apple_music.set_selected_airplay_devices
+              target:
+                entity_id: media_player.music_control_player
+              data:
+                devices:
+                  - Master Bedroom AirPlay
+          - type: button
+            name: Office Only
+            icon: mdi:desk
+            tap_action:
+              action: call-service
+              service: apple_music.set_selected_airplay_devices
+              target:
+                entity_id: media_player.music_control_player
+              data:
+                devices:
+                  - Office Power Amp AirPlay
+                  - Office HomePod Mini
+          - type: button
+            name: Disable All Speakers
+            icon: mdi:speaker-off
+            tap_action:
+              action: call-service
+              service: apple_music.set_selected_airplay_devices
+              target:
+                entity_id: media_player.music_control_player
+              data:
+                devices: []
+      - type: grid
+        cards:
+          - type: heading
+            heading_style: title
+            heading: AirPlay Devices
+          - type: tile
+            grid_options:
+              rows: 4
+            entity: >-
+              media_player.office_power_amp_airplay_office_power_amp_music_controller
+            name: Office Power Amp
+            vertical: true
+            features:
+              - type: media-player-volume-buttons
+                step: 5
+              - type: media-player-volume-slider
+              - type: media-player-playback
+            features_position: bottom
+          - type: tile
+            entity: >-
+              media_player.marantz_av7703_airplay_marantz_av7703_airplay_music_controller
+            name: Marantz Home Theatre
+            vertical: true
+            features:
+              - type: media-player-volume-buttons
+                step: 5
+              - type: media-player-volume-slider
+              - type: media-player-playback
+            features_position: bottom
+          - type: tile
+            entity: >-
+              media_player.master_bedroom_airplay_master_bedroom_music_controller
+            name: Master Bedroom
+            vertical: true
+            features:
+              - type: media-player-volume-buttons
+                step: 5
+              - type: media-player-volume-slider
+              - type: media-player-playback
+            features_position: bottom
+          - type: tile
+            entity: media_player.office_homepod_mini_2
+            name: Office HomePod Mini
+            vertical: true
+            features:
+              - type: media-player-volume-buttons
+                step: 5
+              - type: media-player-volume-slider
+              - type: media-player-playback
+            features_position: bottom
+          - type: tile
+            entity: >-
+              media_player.zippportable_airplay_zippportable_airplay_music_controller
+            name: Zipp Portable Speaker
+            vertical: true
+            features:
+              - type: media-player-volume-buttons
+                step: 5
+              - type: media-player-volume-slider
+              - type: media-player-playback
+            features_position: bottom
+        column_span: 1
+    cards: []
