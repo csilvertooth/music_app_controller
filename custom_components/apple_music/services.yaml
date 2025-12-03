@@ -1,0 +1,68 @@
+# Apple Music Integration Services
+# These services allow interaction with the Music server backend
+
+sync_airplay_entities:
+  name: Sync AirPlay Entities
+  description: Fetch current AirPlay devices from the Music server and update Home Assistant entities
+  fields: {}
+
+set_device_volume:
+  name: Set Device Volume
+  description: Set volume for a specific AirPlay device
+  fields:
+    entity_id:
+      name: Entity ID
+      description: The media player entity ID for the device
+      required: true
+      selector:
+        entity:
+          domain: media_player
+    device:
+      name: Device Name
+      description: Name of the AirPlay device
+      required: true
+      example: "Office HomePod"
+      selector:
+        text:
+    level:
+      name: Volume Level
+      description: Volume level (0-100)
+      required: true
+      example: 75
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: "%"
+
+refresh_device_volumes:
+  name: Refresh Device Volumes
+  description: Refresh volume levels for all AirPlay devices from the backend
+  fields: {}
+
+purge_album_cache:
+  name: Purge Album Cache
+  description: Clear the album artwork cache on the Music server
+  fields: {}
+
+purge_ha_album_cache:
+  name: Purge Home Assistant Album Cache
+  description: Clear the album artwork cache stored locally in Home Assistant
+  fields: {}
+
+refresh_current_artwork:
+  name: Refresh Current Artwork
+  description: Refresh the artwork for the currently playing track
+  fields: {}
+
+set_selected_airplay_devices:
+  name: Set Selected AirPlay Devices
+  description: Set which AirPlay devices should be active and synchronized
+  fields:
+    devices:
+      name: Device List
+      description: List of AirPlay device names to activate (comma-separated)
+      required: true
+      example: "Living Room, Kitchen, Office"
+      selector:
+        object:
